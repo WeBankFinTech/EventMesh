@@ -25,4 +25,5 @@ include 'eventmesh-test'
 include 'eventmesh-spi'
 include 'eventmesh-connector-plugin:eventmesh-connector-api'
 include 'eventmesh-connector-plugin:eventmesh-connector-rocketmq'
+include 'eventmesh-connector-plugin:eventmesh-connector-kafka'
 

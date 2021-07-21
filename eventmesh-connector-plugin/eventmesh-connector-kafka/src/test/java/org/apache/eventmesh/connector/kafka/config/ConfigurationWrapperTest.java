@@ -15,23 +15,20 @@
  * limitations under the License.
  */
 
-task copyConnectorPlugin(dependsOn: ['jar']) {
-    doFirst {
-        new File(projectDir, '../eventmesh-connector-plugin/dist/apps').mkdir()
-        new File(projectDir, '../dist/plugin/connector').mkdirs()
-    }
-    doLast {
-        copy {
-            into('../eventmesh-connector-plugin/dist/apps/')
-            from project.jar.getArchivePath()
-            exclude {
-                "eventmesh-connector-plugin-${version}.jar"
-                "eventmesh-connector-api-${version}.jar"
-            }
-        }
-        copy {
-            into '../dist/plugin/connector'
-            from '../eventmesh-connector-plugin/dist/apps'
-        }
+package org.apache.eventmesh.connector.kafka.config;
+
+import org.apache.eventmesh.connector.kafka.common.Constants;
+import org.junit.Assert;
+import org.junit.Test;
+
+public class ConfigurationWrapperTest {
+
+    @Test
+    public void getProperty() {
+        String filePath = this.getClass().getClassLoader().getResource(Constants.KAFKA_CONF_FILE).getPath();
+        ConfigurationWrapper configurationWrapper = new ConfigurationWrapper(filePath, true);
+        String value = configurationWrapper.getProperty("test");
+        Assert.assertEquals("123", value);
+
     }
 }

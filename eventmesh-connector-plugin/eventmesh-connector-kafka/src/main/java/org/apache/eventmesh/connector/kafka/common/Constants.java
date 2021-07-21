@@ -15,23 +15,11 @@
  * limitations under the License.
  */
 
-task copyConnectorPlugin(dependsOn: ['jar']) {
-    doFirst {
-        new File(projectDir, '../eventmesh-connector-plugin/dist/apps').mkdir()
-        new File(projectDir, '../dist/plugin/connector').mkdirs()
-    }
-    doLast {
-        copy {
-            into('../eventmesh-connector-plugin/dist/apps/')
-            from project.jar.getArchivePath()
-            exclude {
-                "eventmesh-connector-plugin-${version}.jar"
-                "eventmesh-connector-api-${version}.jar"
-            }
-        }
-        copy {
-            into '../dist/plugin/connector'
-            from '../eventmesh-connector-plugin/dist/apps'
-        }
-    }
+package org.apache.eventmesh.connector.kafka.common;
+
+public enum Constants {
+    ;
+    public static final String EVENTMESH_CONF_HOME = System.getProperty("confPath", System.getenv("confPath"));
+
+    public static final String KAFKA_CONF_FILE = "kafka-client.properties";
 }
